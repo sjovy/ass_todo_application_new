@@ -4,29 +4,34 @@ import java.time.LocalDate;
 
 public class TodoItem {
     // Fields:
-    private int id;
+    private final int id;
     private static int nextID = 100;
     private String title;
     private String taskDescription;
+    private final Person creator;
     private LocalDate deadline;
     private boolean done;
-    private Person creator;
 
     // Constructor:
     public TodoItem(String title, String taskDescription, Person creator, String deadline){
         this.id = ++nextID;
         setTitle(title);
-        this.taskDescription = taskDescription;
+        setTaskDescription(taskDescription);
         this.creator = creator;
         setDeadline(deadline);
         this.done = false;
     }
 
+    // Setters:
     public void setTitle(String title) {
         if (title == null || title.trim().isEmpty()) {
             throw new IllegalArgumentException("Input cannot be null or empty.");
         }
         this.title = title;
+    }
+
+    public void setTaskDescription(String taskDescription) {
+        this.taskDescription = taskDescription;
     }
 
     public void setDeadline(String deadline) {
