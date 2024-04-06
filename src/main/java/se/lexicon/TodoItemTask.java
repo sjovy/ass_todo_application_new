@@ -10,6 +10,13 @@ public class TodoItemTask {
     private TodoItem todoItem;
 
     // Constructor:
+    public TodoItemTask(TodoItem todoItem){
+        this.id = ++nextID;
+        this.assigned = false;
+        setAssignee(assignee);
+        setTodoItem(todoItem);
+    }
+
     public TodoItemTask(Person assignee, TodoItem todoItem){
         this.id = ++nextID;
         this.assigned = false;

@@ -13,10 +13,15 @@ public class App {
         i1.getSummary();
         i1.setDone(true);
         i1.getSummary();
+
+
         TodoItemTask t1 = new TodoItemTask(p2, i1);
         t1.getSummary();
         TodoItemTask t2 = new TodoItemTask(p3, i1);
         t2.getSummary();
+        TodoItemTask t3 = new TodoItemTask(i1);
+        t3.getSummary();
+
 
     }
 }
