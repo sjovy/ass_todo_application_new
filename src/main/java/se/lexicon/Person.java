@@ -1,5 +1,7 @@
 package se.lexicon;
 
+import java.util.Objects;
+
 public class Person {
 
     // Fields:
@@ -8,6 +10,7 @@ public class Person {
     private String firstName;
     private String lastName;
     private String email;
+    private AppUser credentials;
 
     // Constructor:
     public Person(String firstName, String lastName, String email) {
@@ -39,27 +42,42 @@ public class Person {
         this.email = email;
     }
 
-    // Getters:
-    public int getId() {
-        return id;
+    public void setCredentials(AppUser credentials) {
+        this.credentials = credentials;
     }
 
+    /*// Getters:
     public String getFirstName() {
         return firstName;
     }
 
     public String getLastName() {
         return lastName;
+    }*/
+
+    public AppUser getCredentials() {
+        return credentials;
     }
 
-    public String getEmail() {
-        return email;
+    // Other:
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstName, lastName, email);
     }
-    
-    // Output info:
-    public void getSummary(){
-        System.out.println("ID: " + getId() +
-                ", Name: " + getFirstName() + " " + getLastName() +
-                ", email: " + getEmail());
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Person)) return false;
+        Person person = (Person) o;
+        return Objects.equals(firstName, person.firstName) &&
+                Objects.equals(lastName, person.lastName) &&
+                Objects.equals(email, person.email);
+    }
+
+    // Output:
+    @Override
+    public String toString() {
+        return "Person: { ID=" + id + ", Name=" + firstName + " " + lastName + ", email=" + email + " }";
     }
 }

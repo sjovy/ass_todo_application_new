@@ -1,6 +1,7 @@
 package se.lexicon;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class TodoItem {
     // Fields:
@@ -45,7 +46,7 @@ public class TodoItem {
         this.done = done;
     }
 
-    // Getters:
+    /*// Getters:
     public int getId() {
         return id;
     }
@@ -64,7 +65,7 @@ public class TodoItem {
 
     public boolean isDone() {
         return done;
-    }
+    }*/
 
     // Other:
     public boolean isOverdue(){
@@ -72,11 +73,27 @@ public class TodoItem {
         return today.isAfter(deadline) && !done;
     }
 
-    // Output info:
-    public void getSummary(){
-        System.out.println("ID: " + getId() +
-                ", Title: " + getTitle() + ", Description: " + getTaskDescription() +
-                ", Creator: " + creator.getFirstName() + " " + creator.getLastName() +
-                ", Deadline: " + getDeadline() + ", DunnIt: " + isDone() + ", Overdue: " + isOverdue());
+    // equals() & hashCode() all fields except Person objects
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, taskDescription, deadline, done);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof TodoItem)) return false;
+        TodoItem todoItem = (TodoItem) o;
+        return id == todoItem.id && done == todoItem.done && title.equals(todoItem.title) &&
+                taskDescription.equals(todoItem.taskDescription) && deadline.equals(todoItem.deadline);
+    }
+
+    // Output info:
+    @Override
+    public String toString() {
+        return "TodoItem: { ID=" + id +
+                ", Title=" + title + ", Description=" + taskDescription +
+                ", Deadline=" + deadline + ", Done=" + done + ", Overdue=" + isOverdue() + " }";
+    }
+
 }
