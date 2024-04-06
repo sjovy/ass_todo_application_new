@@ -17,23 +17,6 @@ public class Person {
         setEmail(email);
     }
 
-    // Getters:
-    public int getId() {
-        return id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
     // Setters:
     private void setFirstName(String firstName) {
         if (firstName == null || firstName.trim().isEmpty()){
@@ -56,6 +39,23 @@ public class Person {
         this.email = email;
     }
 
+    // Getters:
+    public int getId() {
+        return id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+    
     // Output info:
     public void getSummary(){
         System.out.println("ID: " + getId() +
