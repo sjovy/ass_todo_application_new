@@ -53,7 +53,5 @@ public class App {
             System.out.println(user);
 }
         // appUserDAO.remove(u1);
-
-
     }
 }
