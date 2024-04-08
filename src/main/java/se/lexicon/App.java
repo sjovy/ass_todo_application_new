@@ -1,10 +1,15 @@
 package se.lexicon;
 
+import se.lexicon.dao.AppUserDAO;
+import se.lexicon.dao.AppUserDAOCollection;
 import se.lexicon.model.AppUser;
 import se.lexicon.model.Person;
 import se.lexicon.model.TodoItem;
 import se.lexicon.model.TodoItemTask;
 
+import java.util.List;
+
+import static se.lexicon.model.AppRole.ROLE_APP_ADMIN;
 import static se.lexicon.model.AppRole.ROLE_APP_USER;
 
 public class App {
@@ -34,7 +39,20 @@ public class App {
         AppUser u1 = new AppUser("Thomas", "1234", ROLE_APP_USER);
         System.out.println(u1);
         System.out.println(u1.hashCode());
-        System.out.println(u1.equals(p1));
+        AppUser u2 = new AppUser("Olle", "ABCD", ROLE_APP_ADMIN);
+
+        AppUserDAO appUserDAO = new AppUserDAOCollection();
+
+        appUserDAO.persist(u1);
+        AppUser foundUser = appUserDAO.findByUsername("Thomas");
+        System.out.println(foundUser);
+
+        appUserDAO.persist(u2);
+        List<AppUser> allUsers = appUserDAO.findAll();
+        for (AppUser user : allUsers) {
+            System.out.println(user);
+}
+        // appUserDAO.remove(u1);
 
 
     }

@@ -40,6 +40,10 @@ public class AppUser {
 
     // Getters:
 
+    public String getUsername() {
+        return this.user;
+    }
+
     // Other:
 
     @Override
