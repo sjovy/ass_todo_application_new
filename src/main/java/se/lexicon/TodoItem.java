@@ -1,12 +1,13 @@
 package se.lexicon;
 
+import se.lexicon.sequencers.TodoItemIDSequencer;
+
 import java.time.LocalDate;
 import java.util.Objects;
 
 public class TodoItem {
     // Fields:
     private final int id;
-    private static int nextID = 100;
     private String title;
     private String taskDescription;
     private final Person creator;
@@ -15,7 +16,7 @@ public class TodoItem {
 
     // Constructor:
     public TodoItem(String title, String taskDescription, Person creator, String deadline){
-        this.id = ++nextID;
+        this.id = TodoItemIDSequencer.nextId();
         setTitle(title);
         setTaskDescription(taskDescription);
         this.creator = creator;
@@ -46,26 +47,7 @@ public class TodoItem {
         this.done = done;
     }
 
-    /*// Getters:
-    public int getId() {
-        return id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getTaskDescription() {
-        return taskDescription;
-    }
-
-    public LocalDate getDeadline() {
-        return deadline;
-    }
-
-    public boolean isDone() {
-        return done;
-    }*/
+    // Getters:
 
     // Other:
     public boolean isOverdue(){

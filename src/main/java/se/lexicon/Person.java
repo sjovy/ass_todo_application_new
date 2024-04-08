@@ -1,12 +1,13 @@
 package se.lexicon;
 
+import se.lexicon.sequencers.PersonIDSequencer;
+
 import java.util.Objects;
 
 public class Person {
 
     // Fields:
     private final int id;
-    private static int nextID = 10000;
     private String firstName;
     private String lastName;
     private String email;
@@ -14,7 +15,7 @@ public class Person {
 
     // Constructor:
     public Person(String firstName, String lastName, String email) {
-        this.id = ++nextID;
+        this.id = PersonIDSequencer.nextId();
         setFirstName(firstName);
         setLastName(lastName);
         setEmail(email);
@@ -46,14 +47,7 @@ public class Person {
         this.credentials = credentials;
     }
 
-    /*// Getters:
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }*/
+    // Getters:
 
     public AppUser getCredentials() {
         return credentials;

@@ -1,19 +1,20 @@
 package se.lexicon;
 
+import se.lexicon.sequencers.TodoItemTaskIDSequencer;
+
 import java.util.Objects;
 
 public class TodoItemTask {
 
     // Fields:
     private final int id;
-    private static int nextID = 0;
     private Person assignee;
     private boolean assigned;
     private TodoItem todoItem;
 
     // Constructor:
     public TodoItemTask(Person assignee, TodoItem todoItem){
-        this.id = ++nextID;
+        this.id = TodoItemTaskIDSequencer.nextId();
         this.assigned = false;
         setAssignee(assignee);
         setTodoItem(todoItem);
@@ -40,13 +41,6 @@ public class TodoItemTask {
     }
 
     // Getters:
-    public int getId() {
-        return id;
-    }
-
-    public boolean isAssigned() {
-        return assigned;
-    }
 
     // Other:
     @Override
