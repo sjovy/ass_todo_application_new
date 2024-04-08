@@ -1,6 +1,11 @@
 package se.lexicon;
 
-import static se.lexicon.AppRole.ROLE_APP_USER;
+import se.lexicon.model.AppUser;
+import se.lexicon.model.Person;
+import se.lexicon.model.TodoItem;
+import se.lexicon.model.TodoItemTask;
+
+import static se.lexicon.model.AppRole.ROLE_APP_USER;
 
 public class App {
 
