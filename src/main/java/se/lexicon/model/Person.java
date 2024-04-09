@@ -52,6 +52,13 @@ public class Person {
     public AppUser getCredentials() {
         return credentials;
     }
+    public int getPersonId() {
+        return id;
+    }
+
+    public Object getEmail() {
+        return email;
+    }
 
     // Other:
     @Override
@@ -74,4 +81,7 @@ public class Person {
     public String toString() {
         return "Person: { ID=" + id + ", Name=" + firstName + " " + lastName + ", email=" + email + " }";
     }
+
+
+
 }

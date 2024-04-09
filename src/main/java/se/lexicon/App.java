@@ -1,16 +1,9 @@
 package se.lexicon;
 
-import se.lexicon.dao.AppUserDAO;
-import se.lexicon.dao.AppUserDAOCollection;
-import se.lexicon.model.AppUser;
-import se.lexicon.model.Person;
-import se.lexicon.model.TodoItem;
-import se.lexicon.model.TodoItemTask;
-
+import se.lexicon.dao.*;
+import se.lexicon.model.*;
 import java.util.List;
-
-import static se.lexicon.model.AppRole.ROLE_APP_ADMIN;
-import static se.lexicon.model.AppRole.ROLE_APP_USER;
+import static se.lexicon.model.AppRole.*;
 
 public class App {
 
@@ -41,17 +34,33 @@ public class App {
         System.out.println(u1.hashCode());
         AppUser u2 = new AppUser("Olle", "ABCD", ROLE_APP_ADMIN);
 
-        AppUserDAO appUserDAO = new AppUserDAOCollection();
+        // This is not a list, but an AppUserDAOCollection object,
+        // containing a list and methods to manipulate it.
+        AppUserDAO appUserList = new AppUserDAOCollection();
 
-        appUserDAO.persist(u1);
-        AppUser foundUser = appUserDAO.findByUsername("Thomas");
+        appUserList.persist(u1);
+        AppUser foundUser = appUserList.findByUsername("Thomas");
         System.out.println(foundUser);
 
-        appUserDAO.persist(u2);
-        List<AppUser> allUsers = appUserDAO.findAll();
+        appUserList.persist(u2);
+        List<AppUser> allUsers = appUserList.findAll();
         for (AppUser user : allUsers) {
             System.out.println(user);
-}
-        // appUserDAO.remove(u1);
+        }
+        // appUserList.remove(u1);
+
+        PersonDAO personList = new PersonDAOCollection();
+
+        personList.persist(p1);
+        Person foundPerson = personList.findById(1);
+        System.out.println(foundPerson);
+
+        personList.persist(p2);
+
+        List<Person> allPersons = personList.findAll();
+        for (Person person : allPersons) {
+            System.out.println(person);
+        }
+
     }
 }

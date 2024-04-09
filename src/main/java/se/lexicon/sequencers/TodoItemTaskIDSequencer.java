@@ -7,11 +7,11 @@ public class TodoItemTaskIDSequencer {
         return ++currentId;
     }
 
-    public static int getCurrentId() {
+    /*public static int getCurrentId() {
         return currentId;
     }
 
     public static void setCurrentId(int id) {
         currentId = id;
-    }
+    }*/
 }
