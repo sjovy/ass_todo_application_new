@@ -56,7 +56,8 @@ public class Person {
         return id;
     }
 
-    public Object getEmail() {
+//    public Object getEmail() {
+     public String getEmail() {
         return email;
     }
 
@@ -79,8 +80,12 @@ public class Person {
     // Output:
     @Override
     public String toString() {
-        return "Person: { ID=" + id + ", Name=" + firstName + " " + lastName + ", email=" + email + " }";
-    }
+    StringBuilder sb = new StringBuilder();
+    sb.append("Person: { ID=").append(id);
+    sb.append(", Name=").append(firstName).append(" ").append(lastName);
+    sb.append(", email=").append(email).append(" }");
+    return sb.toString();
+}
 
 
 
