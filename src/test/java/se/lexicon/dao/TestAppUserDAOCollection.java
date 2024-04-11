@@ -21,7 +21,6 @@ public class TestAppUserDAOCollection {
     }
     @Test
     public void testPersist() {
-        // Also find by username
         assertEquals("Thomas", myCollection.findByUsername("Thomas").getUsername());
     }
 
