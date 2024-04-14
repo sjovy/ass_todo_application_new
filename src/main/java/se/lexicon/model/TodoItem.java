@@ -2,8 +2,8 @@ package se.lexicon.model;
 
 import se.lexicon.sequencers.TodoItemIDSequencer;
 
-import java.time.LocalDate;
-import java.util.Objects;
+import java.time.*;
+import java.util.*;
 
 public class TodoItem {
     // Fields:
@@ -48,6 +48,26 @@ public class TodoItem {
     }
 
     // Getters:
+    public int getId() {
+        return id;
+    }
+
+    public boolean isDone() {
+        return done;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public Person getCreator() {
+        return creator;
+    }
+
+    public LocalDate getDeadline() {
+        return deadline;
+    }
+
 
     // Other:
     public boolean isOverdue(){
@@ -77,5 +97,7 @@ public class TodoItem {
                 ", Title=" + title + ", Description=" + taskDescription +
                 ", Deadline=" + deadline + ", Done=" + done + ", Overdue=" + isOverdue() + " }";
     }
+
+
 
 }
