@@ -1,7 +1,7 @@
 package se.lexicon.dao;
 
 import org.junit.jupiter.api.*;
-import se.lexicon.model.Person;
+import se.lexicon.model.*;
 
 import java.util.List;
 
@@ -11,6 +11,7 @@ public class TestPersonDAOCollection {
     // Declare variables of class PersonDAOCollection and Person
     private PersonDAOCollection myCollection;
     private Person p1;
+    private TodoItem i1;
 
     @BeforeEach
     public void setup() {
