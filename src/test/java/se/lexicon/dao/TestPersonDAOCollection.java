@@ -58,7 +58,7 @@ public class TestPersonDAOCollection {
     myCollection.persist(p3);
     List<Person> allPersons = myCollection.findAll();
 
-    assertEquals(3, allPersons.size());
+    assertEquals(3,allPersons .size());
     assertTrue(allPersons.contains(p1));
     assertTrue(allPersons.contains(p2));
     assertTrue(allPersons.contains(p3));

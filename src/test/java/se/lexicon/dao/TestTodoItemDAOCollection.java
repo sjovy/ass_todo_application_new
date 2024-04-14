@@ -47,9 +47,6 @@ public class TestTodoItemDAOCollection {
 
     @Test
     public void testFindAllByDoneStatus() {
-        i1.setDone(true);
-        i2.setDone(true);
-        i3.setDone(false);
         List <TodoItem> doneList = myCollection.findAllByDoneStatus(true);
         assertTrue(doneList.contains(i1));
         assertTrue(doneList.contains(i2));
