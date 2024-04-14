@@ -41,6 +41,17 @@ public class TodoItemTask {
     }
 
     // Getters:
+    public int getId() {
+        return id;
+    }
+
+    public boolean isAssigned() {
+        return assigned;
+    }
+
+    public Person getAssignee() {
+        return assignee;
+    }
 
     // Other:
     @Override
@@ -61,4 +72,7 @@ public class TodoItemTask {
     public String toString() {
         return "TodoItemTask: { ID=" + id + ", Item=" + todoItem + ", Assigned=" + assigned + " }";
     }
+
+
+
 }

@@ -88,5 +88,7 @@ public class Person {
 }
 
 
-
+    public int getId() {
+        return id;
+    }
 }
