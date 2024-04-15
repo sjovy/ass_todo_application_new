@@ -85,10 +85,5 @@ public class Person {
     sb.append(", Name=").append(firstName).append(" ").append(lastName);
     sb.append(", email=").append(email).append(" }");
     return sb.toString();
-}
-
-
-    public int getId() {
-        return id;
     }
 }

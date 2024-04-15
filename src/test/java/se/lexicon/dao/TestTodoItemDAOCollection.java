@@ -7,8 +7,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 public class TestTodoItemDAOCollection {
-    // Declare variables of class TodoItemDAOCollection and TodoItem
-    private TodoItemDAOCollection myCollection;
+    private TodoItemDAOCollection todoItemList_dao;
     private Person p1;
     private Person p2;
     private TodoItem i1;
@@ -17,32 +16,34 @@ public class TestTodoItemDAOCollection {
 
     @BeforeEach
     public void setup() {
-        myCollection = new TodoItemDAOCollection();
+        todoItemList_dao = new TodoItemDAOCollection();
         p1 = new Person("Thomas", "Sjövy", "ts@gmail.com");
         p2 = new Person("Mora", "Nisse", "nisse@gmail.com");
         i1 = new TodoItem("Städa", "som fan", p1, "2024-04-25");
         i2 = new TodoItem("Tvätta", "som fan", p2, "2024-04-20");
         i3 = new TodoItem("Handla", "som fan", p1, "2024-04-20");
-        myCollection.persist(i1);
-        myCollection.persist(i2);
-        myCollection.persist(i3);
+        todoItemList_dao.persist(i1);
+        todoItemList_dao.persist(i2);
+        todoItemList_dao.persist(i3);
     }
 
     @Test
     public void testPersist() {
-        assertTrue(myCollection.findAll().contains(i1));
+        // Find all todoItems
+        assertTrue(todoItemList_dao.findAll().contains(i1));
     }
 
     @Test
     public void testFindById() {
         int ID = i1.getId();
-        assertEquals(ID, (myCollection.findById(ID)).getId());
+        // Find todoItem by its ID
+        TodoItem foundTodoItem = todoItemList_dao.findById(ID);
+        assertEquals(ID, foundTodoItem.getId());
     }
 
     @Test
     public void testFindByIdWrongId() {
-        int hittepaId = 9999;
-        assertNull(myCollection.findById(9999));
+        assertNull(todoItemList_dao.findById(9999));
     }
 
     @Test
@@ -50,50 +51,63 @@ public class TestTodoItemDAOCollection {
         i1.setDone(true);
         i2.setDone(true);
         i3.setDone(false);
-        List <TodoItem> doneList = myCollection.findAllByDoneStatus(true);
-        assertTrue(doneList.contains(i1));
-        assertTrue(doneList.contains(i2));
-        assertFalse(doneList.contains(i3));
+
+        // Find all todoItems with a certain done status
+        List <TodoItem> testList = todoItemList_dao.findAllByDoneStatus(true);
+        assertTrue(testList.contains(i1));
+        assertTrue(testList.contains(i2));
+        assertFalse(testList.contains(i3));
     }
 
     @Test
     public void testFindByTitleContains() {
         TodoItem i4 = new TodoItem("Handla", "som fan", p1, "2024-04-20");
-        myCollection.persist(i4);
-        List <TodoItem> titleList = myCollection.findByTitleContains("Handla");
-        assertTrue(titleList.contains(i3));
-        assertTrue(titleList.contains(i4));
-        assertFalse(titleList.contains(i1));
+        todoItemList_dao.persist(i4);
+
+        // Find all todoItems with a certain title
+        List <TodoItem> testList = todoItemList_dao.findByTitleContains("Handla");
+        assertTrue(testList.contains(i3));
+        assertTrue(testList.contains(i4));
+        assertFalse(testList.contains(i1));
     }
 
     @Test
     public void testFindByPersonId() {
-        List <TodoItem> personsList = myCollection.findByPersonId(1);
-        assertTrue(personsList.contains(i1));
-        assertTrue(personsList.contains(i3));
-        assertFalse(personsList.contains(i2));
+
+        // Find all todoItems with a certain creator's ID
+        List <TodoItem> testList = todoItemList_dao.findByPersonId(p1.getPersonId());
+        assertTrue(testList.contains(i1));
+        assertTrue(testList.contains(i3));
+        assertFalse(testList.contains(i2));
+
     }
 
     @Test
     public void testFindByDeadlineBefore() {
-        List <TodoItem> deadlineList = myCollection.findByDeadlineBefore(LocalDate.parse("2024-04-21"));
-        assertTrue(deadlineList.contains(i2));
-        assertTrue(deadlineList.contains(i3));
-        assertFalse(deadlineList.contains(i1));
+        LocalDate deadline = LocalDate.parse("2024-04-21");
+
+        // Find all todoItems with deadline before a certain date
+        List <TodoItem> testList = todoItemList_dao.findByDeadlineBefore(deadline);
+        assertTrue(testList.contains(i2));
+        assertTrue(testList.contains(i3));
+        assertFalse(testList.contains(i1));
     }
 
     @Test
     public void testFindByDeadlineAfter() {
-        List <TodoItem> deadlineList = myCollection.findByDeadlineAfter(LocalDate.parse("2024-04-21"));
-        assertTrue(deadlineList.contains(i1));
-        assertFalse(deadlineList.contains(i2));
-        assertFalse(deadlineList.contains(i3));
+        LocalDate deadline = LocalDate.parse("2024-04-21");
+
+        // Find all todoItems with deadline after a certain date
+        List <TodoItem> testList = todoItemList_dao.findByDeadlineAfter(deadline);
+        assertTrue(testList.contains(i1));
+        assertFalse(testList.contains(i2));
+        assertFalse(testList.contains(i3));
     }
 
     @Test
     public void testRemove() {
-        myCollection.remove(i1);
-        assertFalse(myCollection.findAll().contains(i1));
+        todoItemList_dao.remove(i1);
+        assertFalse(todoItemList_dao.findAll().contains(i1));
     }
 
 }

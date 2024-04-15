@@ -8,14 +8,12 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TestPersonDAOCollection {
-    // Declare variables of class PersonDAOCollection and Person
     private PersonDAOCollection myCollection;
     private Person p1;
     private TodoItem i1;
 
     @BeforeEach
     public void setup() {
-        // Instantiate the objects
         myCollection = new PersonDAOCollection();
         p1 = new Person("Thomas", "Sjövy", "ts@gmail.com");
         myCollection.persist(p1);

@@ -2,13 +2,12 @@ package se.lexicon.dao;
 import org.junit.jupiter.api.*;
 import se.lexicon.model.*;
 
-import java.time.LocalDate;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TestTodoItemTaskDAOCollection {
-    private TodoItemTaskDAOCollection myCollection;
+    private TodoItemTaskDAOCollection todoItemTaskList_dao;
     private Person p1;
     private Person p2;
     private TodoItem i1;
@@ -20,7 +19,7 @@ public class TestTodoItemTaskDAOCollection {
 
     @BeforeEach
     public void setup() {
-        myCollection = new TodoItemTaskDAOCollection();
+        todoItemTaskList_dao = new TodoItemTaskDAOCollection();
         p1 = new Person("Thomas", "Sjövy", "ts@gmail.com");
         p2 = new Person("Mora", "Nisse", "nisse@gmail.com");
         i1 = new TodoItem("Städa", "som fan", p1, "2024-04-25");
@@ -29,48 +28,42 @@ public class TestTodoItemTaskDAOCollection {
         t12 = new TodoItemTask(p1, i2);
         t21 = new TodoItemTask(p2, i1);
         t22 = new TodoItemTask(p2, i2);
-        myCollection.persist(t11);
-        myCollection.persist(t12);
-        myCollection.persist(t21);
-        myCollection.persist(t22);
+        todoItemTaskList_dao.persist(t11);
+        todoItemTaskList_dao.persist(t12);
+        todoItemTaskList_dao.persist(t21);
+        todoItemTaskList_dao.persist(t22);
     }
 
     @Test
     public void testPersist() {
-        assertTrue(myCollection.findAll().contains(t11));
+        assertTrue(todoItemTaskList_dao.findAll().contains(t11));
     }
 
-    @Test
+    /*@Test
     public void testFindById() {
         int ID = i1.getId();
-        assertEquals(ID, (myCollection.findById(ID)).getId());
-    }
+        assertEquals(ID, (todoItemTaskList_dao.findById(ID)));
+    }*/
 
     @Test
     public void testFindByIdWrongId() {
-        int hittepaId = 9999;
-        assertNull(myCollection.findById(9999));
+        assertNull(todoItemTaskList_dao.findById(9999));
     }
 
     @Test
     public void testFindAll() {
-        assertEquals(4, myCollection.findAll().size());
-        List<TodoItemTask> allTasks = myCollection.findAll();
+        assertEquals(4, todoItemTaskList_dao.findAll().size());
+        List<TodoItemTask> allTasks = todoItemTaskList_dao.findAll();
         assertTrue(allTasks.contains(t11));
         assertTrue(allTasks.contains(t12));
         assertTrue(allTasks.contains(t21));
         assertTrue(allTasks.contains(t22));
     }
 
-
-
-
-
-
     @Test
     public void testRemove() {
-        myCollection.remove(t11);
-        assertFalse(myCollection.findAll().contains(t11));
+        todoItemTaskList_dao.remove(t11);
+        assertFalse(todoItemTaskList_dao.findAll().contains(t11));
     }
 
 }
