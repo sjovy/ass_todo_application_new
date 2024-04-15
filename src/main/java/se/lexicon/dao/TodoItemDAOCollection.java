@@ -4,8 +4,9 @@ import se.lexicon.model.*;
 
 import java.time.LocalDate;
 import java.util.*;
+import java.util.function.Predicate;
 
-public class TodoItemDAOCollection implements TodoItemDAO{
+public class TodoItemDAOCollection implements TodoItemDAO {
 
     private List<TodoItem> todoItemsList = new ArrayList<>();
 
@@ -57,6 +58,22 @@ public class TodoItemDAOCollection implements TodoItemDAO{
         }
         return outputList;
     }
+
+
+    /*@Override
+    public List<TodoItem> find(Predicate<TodoItem> filter) {
+
+        // Set up a list to hold the todoItems based on the title
+        List<TodoItem> outputList = new ArrayList<>();
+
+        for (TodoItem tdi : todoItemsList) {
+            if (filter.test(tdi)) {
+                outputList.add(tdi);
+            }
+        }
+        return outputList;
+        // return todoItemsList.stream().filter(tdi -> tdi.getTitle().contains(title)).toList();
+    }*/
 
     @Override
     public List<TodoItem> findByPersonId(int personId) {
