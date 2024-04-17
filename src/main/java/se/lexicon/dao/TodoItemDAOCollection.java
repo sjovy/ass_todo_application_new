@@ -5,6 +5,7 @@ import se.lexicon.model.*;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class TodoItemDAOCollection implements TodoItemDAO {
 
@@ -17,12 +18,10 @@ public class TodoItemDAOCollection implements TodoItemDAO {
 
     @Override
     public TodoItem findById(int id) {
-        for (TodoItem tdi : todoItemsList) {
-            if (tdi.getId() == id) {
-                return tdi;
-            }
-        }
-        return null;
+        return todoItemsList.stream()
+                            .filter(tdi -> tdi.getId() == id)
+                            .findFirst()
+                            .orElse(null);
     }
 
     @Override
@@ -32,16 +31,9 @@ public class TodoItemDAOCollection implements TodoItemDAO {
 
     @Override
     public List<TodoItem> findAllByDoneStatus(boolean done) {
-
-        // Set up a list to hold the todoItems based on the done status
-        List<TodoItem> outputList = new ArrayList<>();
-
-        for (TodoItem tdi : todoItemsList) {
-            if (tdi.isDone() == done) {
-                outputList.add(tdi);
-            }
-        }
-        return outputList;
+        return todoItemsList.stream()
+                            .filter(tdi -> tdi.isDone() == done)
+                            .collect(Collectors.toList());
     }
 
     @Override

@@ -114,15 +114,11 @@ public class App {
             }
             System.out.println(todoItemTask);
         }
-
-
+        
         List<TodoItemTask> foundByPersonId = todoItemTaskList.findByPersonId(p1.getPersonId());
         for (TodoItemTask todoItemTask : foundByPersonId) {
             System.out.println(todoItemTask);
         }
-
-
-
 
         /*Predicate<TodoItem> filterByTitle = todoItem -> todoItem.getTitle().contains("Task1");
         Predicate<TodoItem> filterById = todoItem -> todoItem.getId() == 1;

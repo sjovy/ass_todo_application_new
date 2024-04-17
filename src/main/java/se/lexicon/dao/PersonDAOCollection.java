@@ -1,8 +1,7 @@
 package se.lexicon.dao;
-
 import se.lexicon.model.Person;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.function.Predicate;
 
 public class PersonDAOCollection implements PersonDAO {
     private List<Person> persons = new ArrayList<>();
@@ -14,22 +13,25 @@ public class PersonDAOCollection implements PersonDAO {
 
     @Override
     public Person findById(int personId) {
-        for (Person person : persons) {
-            if (person.getPersonId() == personId) {
-                return person;
-            }
-        }
-        return null;
+        // Requires no import of predicate library.
+        // Lambda is better than :: because of the risk for null.
+        Optional<Person> Person_op = persons.stream()
+                                                 .filter(person -> person.getPersonId() == personId)
+                                                 .findFirst();
+
+        return Person_op.orElse(null);
     }
 
     @Override
     public Person findByEmail(String email) {
-        for (Person person : persons) {
-            if (person.getEmail().equals(email)) {
-                return person;
-            }
-        }
-        return null;
+        // requires import of Predicate library.
+        // .orElse(null) - a method from Optional - is required to return null if not found.
+        Predicate<Person> emailMatch = person -> person.getEmail().equals(email);
+        Optional<Person> personOp = persons.stream()
+                                           .filter(emailMatch)
+                                           .findFirst();
+
+        return personOp.orElse(null);
     }
 
     @Override
