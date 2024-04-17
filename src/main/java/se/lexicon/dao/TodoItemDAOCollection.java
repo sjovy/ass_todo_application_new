@@ -26,7 +26,7 @@ public class TodoItemDAOCollection implements TodoItemDAO {
 
     @Override
     public List<TodoItem> findAll() {
-        return new ArrayList<>(todoItemsList);
+        return Collections.unmodifiableList(todoItemsList);
     }
 
     @Override
@@ -38,19 +38,10 @@ public class TodoItemDAOCollection implements TodoItemDAO {
 
     @Override
     public List<TodoItem> findByTitleContains(String title) {
-
-        // Set up a list to hold the todoItems based on the title
-        List<TodoItem> outputList = new ArrayList<>();
-
-        for (TodoItem tdi : todoItemsList) {
-            String todoItemTitle = tdi.getTitle();
-            if (todoItemTitle.contains(title)) {
-                outputList.add(tdi);
-            }
-        }
-        return outputList;
+        return todoItemsList.stream()
+                            .filter(tdi -> tdi.getTitle().contains(title))
+                            .collect(Collectors.toList());
     }
-
 
     /*@Override
     public List<TodoItem> find(Predicate<TodoItem> filter) {
@@ -114,6 +105,6 @@ public class TodoItemDAOCollection implements TodoItemDAO {
 
     @Override
     public void remove(TodoItem todoItem) {
-        todoItemsList.remove(todoItem);
+        todoItemsList.removeIf(p -> p.equals(todoItem));
     }
 }

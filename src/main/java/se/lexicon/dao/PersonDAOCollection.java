@@ -27,21 +27,23 @@ public class PersonDAOCollection implements PersonDAO {
         // requires import of Predicate library.
         // .orElse(null) - a method from Optional - is required to return null if not found.
         Predicate<Person> emailMatch = person -> person.getEmail().equals(email);
-        Optional<Person> personOp = persons.stream()
+        // its also possible to break out the repeat stream to a separate method.
+        // or even a separate utility class if it is used in multiple places.
+        Optional<Person> person_op = persons.stream()
                                            .filter(emailMatch)
                                            .findFirst();
 
-        return personOp.orElse(null);
+        return person_op.orElse(null);
     }
 
     @Override
     public List<Person> findAll() {
-        return new ArrayList<>(persons);
+        return Collections.unmodifiableList(persons);
     }
 
     @Override
     public void remove(Person person) {
-        persons.remove(person);
+        persons.removeIf(p -> p.equals(person));
     }
 
 }

@@ -56,7 +56,6 @@ public class Person {
         return id;
     }
 
-//    public Object getEmail() {
      public String getEmail() {
         return email;
     }

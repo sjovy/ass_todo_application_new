@@ -1,8 +1,8 @@
 package se.lexicon.dao;
 
 import se.lexicon.model.AppUser;
-import java.util.ArrayList;
-import java.util.List;
+
+import java.util.*;
 
 public class AppUserDAOCollection implements AppUserDAO {
     private List<AppUser> appUsers = new ArrayList<>();
@@ -20,15 +20,15 @@ public class AppUserDAOCollection implements AppUserDAO {
                        .filter(user -> user.getUsername().equals(username))
                        .findFirst()
                        .orElse(null);
-}
+    }
 
     @Override
     public List<AppUser> findAll() {
-        return new ArrayList<>(appUsers);
+        return Collections.unmodifiableList(appUsers);
     }
 
     @Override
     public void remove(AppUser user) {
-        appUsers.remove(user);
+        appUsers.removeIf(u -> u.equals(user));
     }
 }
