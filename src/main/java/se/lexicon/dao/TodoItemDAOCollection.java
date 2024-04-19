@@ -41,6 +41,8 @@ public class TodoItemDAOCollection implements TodoItemDAO {
                             .collect(Collectors.toList());
     }
 
+    // Predicates for findMany:
+
     @Override
     public List<TodoItem> findByPersonId(int personId) {
         return findMany(tdi -> tdi.getCreator().getPersonId() == personId);
@@ -65,6 +67,5 @@ public class TodoItemDAOCollection implements TodoItemDAO {
     public List<TodoItem> findByTitleContains(String title) {
         return findMany(tdi -> tdi.getTitle().contains(title));
     }
-
 
 }

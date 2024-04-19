@@ -6,6 +6,20 @@ import java.util.function.Predicate;
 public class PersonDAOCollection implements PersonDAO {
     private List<Person> persons = new ArrayList<>();
 
+    // Singleton instance
+    private static PersonDAOCollection INSTANCE = null;
+
+    // Private constructor
+    private PersonDAOCollection() {}
+
+    // Singleton method
+    public static PersonDAOCollection getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new PersonDAOCollection();
+        }
+        return INSTANCE;
+    }
+
     @Override
     public void persist(Person person) {
         persons.add(person);

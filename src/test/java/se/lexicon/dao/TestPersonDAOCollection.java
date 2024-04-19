@@ -14,7 +14,7 @@ public class TestPersonDAOCollection {
 
     @BeforeEach
     public void setup() {
-        myCollection = new PersonDAOCollection();
+        myCollection = PersonDAOCollection.getInstance();
         p1 = new Person("Thomas", "Sjövy", "ts@gmail.com");
         myCollection.persist(p1);
     }

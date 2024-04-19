@@ -54,7 +54,7 @@ public class App {
         }
         // appUserList.remove(u1);
 
-        PersonDAO personList = new PersonDAOCollection();
+        PersonDAO personList = PersonDAOCollection.getInstance();
 
         personList.persist(p1);
         Person foundPerson = personList.findById(1);
