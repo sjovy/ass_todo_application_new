@@ -1,7 +1,12 @@
 package se.lexicon.dao;
 import se.lexicon.model.Person;
+import se.lexicon.util.JsonUtil;
+
+import java.io.IOException;
 import java.util.*;
 import java.util.function.Predicate;
+
+import com.fasterxml.jackson.core.type.TypeReference;
 
 public class PersonDAOCollection implements PersonDAO {
     private List<Person> persons = new ArrayList<>();
@@ -22,7 +27,9 @@ public class PersonDAOCollection implements PersonDAO {
 
     @Override
     public void persist(Person person) {
-        persons.add(person);
+        if (!persons.contains(person)) {
+            persons.add(person);
+        }
     }
 
     @Override
@@ -60,4 +67,16 @@ public class PersonDAOCollection implements PersonDAO {
         persons.removeIf(p -> p.equals(person));
     }
 
+    // Implementation of Data Persistence in PersonDAOCollection
+    // Should not be part of DAO interface
+    public void saveToFile(String filePath) throws IOException {
+        JsonUtil.writeJsonToFile(filePath, persons);
+    }
+
+    public void loadFromFile(String filePath, TypeReference<List<Person>> typeReference) throws IOException {
+        List<Person> loadedPersons = JsonUtil.readJsonFromFile(filePath, new TypeReference<List<Person>>() {});
+        persons.clear();
+        persons.addAll(loadedPersons);
+    }
 }
+

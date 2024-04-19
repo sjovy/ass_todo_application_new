@@ -1,9 +1,11 @@
 package se.lexicon;
 
 // import com.sun.tools.javac.comp.Todo;
+import com.fasterxml.jackson.core.type.TypeReference;
 import se.lexicon.dao.*;
 import se.lexicon.model.*;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.function.Predicate;
@@ -13,6 +15,15 @@ import static se.lexicon.model.AppRole.*;
 public class App {
 
     public static void main(String[] args) {
+        PersonDAOCollection personList = PersonDAOCollection.getInstance();
+
+        try {
+            // Load a previously saved state of personList from a file
+            personList.loadFromFile("src/main/java/se/lexicon/data/persons.json", new TypeReference<List<Person>>() {});
+        } catch (IOException e) {
+            System.out.println("Error loading persons from file: " + e.getMessage());
+        }
+
         Person p1 = new Person("Thomas", "Sjövy", "ts@gmail.com");
         System.out.println(p1);
         System.out.println(p1.hashCode());
@@ -54,13 +65,12 @@ public class App {
         }
         // appUserList.remove(u1);
 
-        PersonDAO personList = PersonDAOCollection.getInstance();
-
         personList.persist(p1);
         Person foundPerson = personList.findById(1);
         System.out.println(foundPerson);
 
         personList.persist(p2);
+        personList.persist(p3);
 
         List<Person> allPersons = personList.findAll();
         for (Person person : allPersons) {
@@ -118,6 +128,13 @@ public class App {
         List<TodoItemTask> foundByPersonId = todoItemTaskList.findByPersonId(p1.getPersonId());
         for (TodoItemTask todoItemTask : foundByPersonId) {
             System.out.println(todoItemTask);
+        }
+
+        try {
+            // Save the current state of personList to a file
+            personList.saveToFile("src/main/java/se/lexicon/data/persons.json");
+        } catch (IOException e) {
+            System.out.println("Error saving persons to file: " + e.getMessage());
         }
 
         /*Predicate<TodoItem> filterByTitle = todoItem -> todoItem.getTitle().contains("Task1");
