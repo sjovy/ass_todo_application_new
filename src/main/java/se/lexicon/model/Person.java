@@ -1,5 +1,6 @@
 package se.lexicon.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import se.lexicon.sequencers.PersonIDSequencer;
 
 import java.util.Objects;
@@ -7,36 +8,43 @@ import java.util.Objects;
 public class Person {
 
     // Fields:
+    @JsonProperty("personId")
     private final int id;
     private String firstName;
     private String lastName;
     private String email;
     private AppUser credentials;
 
-    // Constructor:
-    public Person(String firstName, String lastName, String email) {
+    // Default constructor
+    public Person() {
         this.id = PersonIDSequencer.nextId();
+    }
+
+    // Existing constructor:
+    public Person(String firstName, String lastName, String email) {
+        //this.id = PersonIDSequencer.nextId();
+        this();
         setFirstName(firstName);
         setLastName(lastName);
         setEmail(email);
     }
 
     // Setters:
-    private void setFirstName(String firstName) {
+    public void setFirstName(String firstName) {
         if (firstName == null || firstName.trim().isEmpty()){
             throw new IllegalArgumentException("Input cannot be null or empty.");
         }
         this.firstName = firstName;
     }
 
-    private void setLastName(String lastName) {
+    public void setLastName(String lastName) {
         if (lastName == null || lastName.trim().isEmpty()){
             throw new IllegalArgumentException("Input cannot be null or empty.");
         }
         this.lastName = lastName;
     }
 
-    private void setEmail(String email) {
+    public void setEmail(String email) {
         if (email == null || email.trim().isEmpty()){
             throw new IllegalArgumentException("Input cannot be null or empty.");
         }
@@ -48,10 +56,18 @@ public class Person {
     }
 
     // Getters:
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
 
     public AppUser getCredentials() {
         return credentials;
     }
+
     public int getPersonId() {
         return id;
     }
